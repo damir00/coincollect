@@ -1,0 +1,13 @@
+h1 Coin Collect - #{coin.name}
+
+h2 #{coin.name}
+
+div(id="graph" style="width:700px;height:500px;")
+
+script 
+	|var page_data={
+	|	coin_name:"#{coin.name}",
+	|};
+
+script(src="/js/trade_graph.js")
+

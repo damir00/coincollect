@@ -1,0 +1,40 @@
+h1 Coin Collect
+
+h4 #{coins.length} coins
+
+table
+  tr
+    td Coin
+    td Price
+    td Volume
+    td Supply
+    td Market Cap
+    td 24h Change
+    td 7 Day Graph
+
+  - for (i in coins) {
+  - var coin=coins[i]
+  tr(data-coin="#{coin.name}")
+    td
+      a(href="/detail/#{coin.name}") #{coin.name}
+
+    td #{Number(coin.price).toFixed(8)}
+    td #{Number(coin.volume).toFixed(8)}
+    td #{coin.total_coins || "-"}
+    if coin.total_coins
+      td #{ (Number(coin.price)*Number(coin.total_coins)).toFixed(8) }
+    else
+      td -
+
+    if coin.old_price
+      td #{ ( (Number(coin.price) / Number(coin.old_price) -1) * 100 ).toFixed(2)+" %" || "-"}
+    else
+      td -
+    td
+      //- div(class="chart" style="width:400px;height:200px")
+      img(src="/images/graph/#{coin.name}.png")
+
+  - }
+
+//- script(src="/js/graph.js")
+
